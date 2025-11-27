@@ -1,6 +1,6 @@
 import database from "../config/database.js"
 
-class Clientes {
+class Cliente {
     constructor() {
         this.model = database.db.define('clientes', {
             id: {
@@ -8,7 +8,7 @@ class Clientes {
                 primaryKey: true,
                 autoIncrement: true
             },
-            dia: {
+            nome: {
                 type: database.db.Sequelize.STRING
             },
             email: {
@@ -17,7 +17,14 @@ class Clientes {
             senha: {
                 type: database.db.Sequelize.STRING
             },
+            ativo: {
+                type: database.db.Sequelize.BOOLEAN
+            },
+             permissao: {
+                // recomendo usar ENUM
+                type: database.db.Sequelize.INTEGER
+            }
         })
     }
 }
-export default new Clientes().model
+export default new Cliente().model

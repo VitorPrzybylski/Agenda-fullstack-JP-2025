@@ -36,17 +36,15 @@ class ControllerAtendimento {
             res.status(500).send({ error: error.message })
         }
     }
-    Update(req, res) {
+       Update(req, res) {
         try {
-            // const id = req.params.id 
-            // const id = req.body.id
-            const dia = req.body.dia
-            const hora = req.body.hora
-            const valor = req.body.valor
-            const concluido = req.body.concluido
+            const id = req.params.id   // <--- ISSO AQUI FALTAVA!!
 
-            ServiceAtendimento.Update(dia,hora,valor,concluido)
-            res.send({msg:"update feito com sucesso"})
+            const { dia, hora, valor, concluido } = req.body
+
+            ServiceAtendimento.Update(id, dia, hora, valor, concluido)
+
+            res.send({ msg: "Update feito com sucesso" })
         } catch (error) {
             res.send({ error: error.message })
         }

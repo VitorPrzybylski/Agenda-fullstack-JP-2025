@@ -4,7 +4,7 @@ class ServiceAtendimento {
         if (!id) {
             throw new Error("falta o ID")
         }
-        const atendimento = await Atendimentos.findByPk(id)
+        const atendimento = await Atendimento.findByPk(id)
 
         if (!atendimento) {
             throw new Error("Atendimento nao encontrado")
@@ -12,28 +12,28 @@ class ServiceAtendimento {
         return atendimento
     }
     async FindAll() {
-        return Atendimentos.findAll()
+        return Atendimento.findAll()
     }
     async Create(nome, email, senha) {
         if (!nome || !email || !senha) {
             throw new Error("preencher todos os campos")
         }
-        await Atendimentos.create({
+        await Atendimento.create({
             nome,
             email,
             senha
         })
     }
-    
-    async Update(id, nome, senha,email) {
-        const atendimentos = await Atendimentos.findByPk(id)
-        // oldUser.nome = nome || oldUser.nome
 
-        atendimentos.update(id, nome,senha,email)
+    async Update(id, dia, hora, valor, concluido) {
+        await Atendimento.update(
+            { dia, hora, valor, concluido },   // campos
+            { where: { id } }                  // condição
+        )
     }
 
     async Delete(id) {
-        const atendimento = await Atendimentos.findByPk(id)
+        const atendimento = await Atendimento.findByPk(id)
 
         atendimento.destroy()
     }
