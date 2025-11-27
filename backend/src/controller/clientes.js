@@ -1,18 +1,27 @@
-import ServiceClientes from "../service/clientes.js"
+import ServiceCliente from "../service/clientes.js"
 
-class ControllerClientes {
+class ControllerCliente {
     async FindAll(_, res) {
         try {
-            const clientes = await ServiceClientes.FindAll()
+            const clientes = await ServiceCliente.FindAll()
             res.send({ clientes })
         } catch (error) {
             res.send({ error: error.menssage })
         }
     }
+    // async Create(req, res) {
+    //     try {
+    //         const { nome, email, senha,ativo } = req.body
+    //         await ServiceCliente.Create(nome, email, senha,ativo)
+    //         res.status(201).send()
+    //     } catch (error) {
+    //         res.status(500).send({ error: error.message })
+    //     }
+    // }
     async Create(req, res) {
         try {
-            const { nome, email, senha } = req.body
-            await ServiceClientes.Create(nome, email, senha)
+            const { nome, email, senha, ativo } = req.body
+            await ServiceCliente.Create(nome, email, senha, ativo)
             res.status(201).send()
         } catch (error) {
             res.status(500).send({ error: error.message })
@@ -21,7 +30,7 @@ class ControllerClientes {
     async FindOne(req, res) {
         try {
             const id = req.params.id
-            const cliente = await ServiceClientes.FindOne(id)
+            const cliente = await ServiceCliente.FindOne(id)
             res.send({ cliente })
         } catch (error) {
             res.status(500).send({ error: error.message })
@@ -30,7 +39,7 @@ class ControllerClientes {
     async Delete(req, res) {
         try {
             const id = req.params.id
-            await ServiceClientes.Delete(id)
+            await ServiceCliente.Delete(id)
             res.status(204).send()
         } catch (error) {
             res.status(500).send({ error: error.message })
@@ -44,18 +53,21 @@ class ControllerClientes {
             const email = req.body.email
             const senha = req.body.senha
 
-            ServiceClientes.Update(id, nome,email,senha)
-            res.send({msg:"update feito com sucesso"})
+            ServiceCliente.Update(id, nome, email, senha)
+            res.send({ msg: "update feito com sucesso" })
         } catch (error) {
             res.send({ error: error.message })
         }
     }
-    async Login(_, res) {
+    async Login(req, res) {
         try {
-            const clientes = await ServiceClientes.FindAll()
-            res.send({ clientes })
+            const { email, senha } = req.body
+
+            const token = await ServiceCliente.Login(email, senha)
+
+            res.status(200).send({ token })
         } catch (error) {
-            res.send({ error: error.menssage })
+            res.status(500).send({ error: error.message })
         }
     }
-} export default new ControllerClientes()
+} export default new ControllerCliente()

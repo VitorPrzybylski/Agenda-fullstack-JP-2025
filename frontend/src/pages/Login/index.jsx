@@ -2,14 +2,15 @@ import { useContext, useState } from 'react';
 import './styles.css'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify'
-import { authContext } from '../../assets/auth/Context';
+import { AuthContext } from '../../auth/Context';
 import { loginCliente } from '../../api/clientes'
 
 export default function Login() {
-  const { login } = useContext(authContext)
+  const { login } = useContext(AuthContext)
   const navigate = useNavigate();
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
+  
   const handleBackClick = () => {
     navigate('/');
   };

@@ -1,10 +1,12 @@
 import express from 'express'
-import ControllerClientes from "../controller/clientes.js"
+import ControllerCliente from "../controller/clientes.js"
+
 
 const routerCliente = express.Router()
-routerCliente.get('/clientes', ControllerClientes.FindAll)
-routerCliente.post('/cliente/create', ControllerClientes.Create)
-routerCliente.get('/cliente/:id', ControllerClientes.FindOne)
-routerCliente.delete('/cliente/:id', ControllerClientes.Delete)
-routerCliente.put('/cliente/:id', ControllerClientes.Update)
+routerCliente.post('/login', ControllerCliente.Login)
+routerCliente.get('/clientes', ControllerCliente.FindAll)
+routerCliente.post('/cliente/create', ControllerCliente.Create)
+routerCliente.get('/cliente/:id', ControllerCliente.FindOne)
+routerCliente.delete('/cliente/:id', ControllerCliente.Delete)
+routerCliente.put('/cliente/:id', ControllerCliente.Update)
 export default routerCliente

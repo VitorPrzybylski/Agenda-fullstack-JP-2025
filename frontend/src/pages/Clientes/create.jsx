@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
+import { createCliente } from "../../api/clientes";
+
 import './styles.css'
 import { toast } from "react-toastify";
 
@@ -10,27 +12,27 @@ const INITIAL_STATE = {
     ativo: true
 }
 
-export default function CreateClientes() {
+export default function CreateCliente() {
     const navigate = useNavigate()
-    const [clientes, setclientes] = useState(INITIAL_STATE)
+    const [cliente, setClientes] = useState(INITIAL_STATE)
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-        setclientes({
-            ...clientes,
+        setClientes({
+            ...cliente,
             [id]: value
         })
     }
 
     const handleReset = (e) => {
         e.preventDefault()
-        setclientes(INITIAL_STATE)
+        setClientes(INITIAL_STATE)
     }
 
     const handleSave = async (e) => {
         e.preventDefault()
         // seria idela validar os valores do objeto antes de enviar
-        const response = await createClientes(clientes)
+        const response = await createCliente(cliente)
 
         if (response.status === 201) {
             toast("Usuário criado com sucesso")
@@ -46,15 +48,15 @@ export default function CreateClientes() {
             <form>
                 <div>
                     <label>Nome: </label>
-                    <input type="text" name="nome" id='nome' value={clientes.nome} onChange={handleChange} />
+                    <input type="text" name="nome" id='nome' value={cliente.nome} onChange={handleChange} />
                 </div>
                 <div>
                     <label>Email: </label>
-                    <input type="email" name="email" id='email' value={clientes.email} onChange={handleChange} />
+                    <input type="email" name="email" id='email' value={cliente.email} onChange={handleChange} />
                 </div>
                 <div>
                     <label>Senha: </label>
-                    <input type="password" name="senha" id='senha' value={clientes.senha} onChange={handleChange} />
+                    <input type="password" name="senha" id='senha' value={cliente.senha} onChange={handleChange} />
                 </div>
                 <div className="actions">
                     <button
