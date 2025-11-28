@@ -5,6 +5,11 @@ main {
     background: #f5f5f5;
     font-family: Arial, sans-serif;
 }
+label {
+  display: inline-block;
+  margin-right: 12px; /* espaço horizontal */
+}
+
 
 .cliente-list {
     width: 100%;

@@ -1,48 +1,44 @@
 import { Link } from 'react-router-dom'
 import './style.css'
 
-
 export default function Header() {
-    //pegar o token
+    const token = localStorage.getItem('token') // pega token
 
     return (
         <header>
             <h1>Minha API</h1>
+
             <nav>
+
+                {/* SEMPRE LIBERADOS */}
                 <Link to='/'>
-                    <button>
-                        Inicio
-                    </button>
+                    <button>Inicio</button>
                 </Link>
 
-                <Link to='/atendimentos'>
-                    <button>
-                        Atendimentos
-                    </button>
-                </Link>
-                <Link to='/create/atendimento'>
-                    <button>
-                        Criar atendimento
-                    </button>
-                </Link>
-                <Link to='/update/atendimento'>
-                    <button>
-                        update atendimento
-                    </button>
-                </Link>
-
-
-                <Link to='/clientes'>
-                    <button>
-                        clientes
-                    </button>
+                <Link to='/create/cliente'>
+                    <button>Criar usuário</button>
                 </Link>
 
                 <Link to='/login'>
-                    <button>
-                        Login
-                    </button>
+                    <button>Login</button>
                 </Link>
+
+                {/* SOMENTE SE LOGADO */}
+                {
+                    token && (
+                        <>
+                            <Link to='/atendimentos'>
+                                <button>Atendimentos</button>
+                            </Link>
+
+
+                            <Link to='/cliente'>
+                                <button>Cliente</button>
+                            </Link>
+                        </>
+                    )
+                }
+
             </nav>
         </header>
     )

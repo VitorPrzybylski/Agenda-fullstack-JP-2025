@@ -5,11 +5,13 @@ import { createAtendimento } from "../../api/atendimentos";
 import './styles.css'
 import { toast } from "react-toastify";
 
+
 const INITIAL_STATE = {
-    nome: '',
-    email: '',
-    senha: '',
-    ativo: true
+    dia: '',
+    hora: '',
+    valor: '',
+    concluido: false,
+    clientId: ''
 }
 
 export default function CreateAtendimento() {
@@ -46,26 +48,22 @@ export default function CreateAtendimento() {
     return (
         <div className="form">
             <form>
-                    <div>
-                    <label>Dia: </label>
-                    <input type="date" name="dia" id='nome' value={atendimento.dia} onChange={handleChange} />
-                </div>
-                <div>
+                <label>Dia: </label>
+                <input type="date" id='dia' name="dia" value={atendimento.dia} onChange={handleChange} />
                     <label>Hora: </label>
-                    <input type="time" name="hora" id='email' value={atendimento.hora} onChange={handleChange} />
-                </div>
-                <div>
+
+                <input type="time" id='hora' name="hora" value={atendimento.hora} onChange={handleChange} />
                     <label>Valor: </label>
-                    <input type="number" name="valor" id='senha' value={atendimento.valor} onChange={handleChange} />
-                </div>
-                <div>
+
+                <input type="number" id='valor' name="valor" value={atendimento.valor} onChange={handleChange} />
                     <label>Concluido: </label>
-                    <input type="checkbox" name="concluido" id='senha' value={atendimento.concluido} onChange={handleChange} />
-                </div>
-                <div>
-                    <label>ClientId: </label>
-                    <input type="number" name="clientId" id='senha' value={atendimento.clientId} onChange={handleChange} />
-                </div>
+
+                <input type="checkbox" id='concluido' name="concluido" checked={atendimento.concluido} onChange={(e) =>
+                    setAtendimentos({ ...atendimento, concluido: e.target.checked })
+                } />
+
+                <input type="number" id='clientId' name="clientId" value={atendimento.clientId} onChange={handleChange} />
+
                 <div className="actions">
                     <button
                         type="reset"
