@@ -15,6 +15,23 @@ export default function Header() {
                     </button>
                 </Link>
 
+                <Link to='/atendimentos'>
+                    <button>
+                        Atendimentos
+                    </button>
+                </Link>
+                <Link to='/create/atendimento'>
+                    <button>
+                        Criar atendimento
+                    </button>
+                </Link>
+                <Link to='/update/atendimento'>
+                    <button>
+                        update atendimento
+                    </button>
+                </Link>
+
+
                 <Link to='/clientes'>
                     <button>
                         clientes

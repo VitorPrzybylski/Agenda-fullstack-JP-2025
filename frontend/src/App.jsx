@@ -3,6 +3,9 @@ import Footer from './components/Footer'
 import CreateCliente from './pages/Clientes/create'
 import UpdateCliente from './pages/Clientes/update'
 import { AuthProvider } from './auth/Context'
+import Atendimentos from './pages/Atendimentos'
+import CreateAtendimento from './pages/Atendimentos/create'
+import UpdateAtendimento from './pages/Atendimentos/update'
 import Clientes from './pages/Clientes'
 import Login from './pages/Login'
 import { Route, Routes } from 'react-router-dom'
@@ -19,6 +22,10 @@ function App() {
           <Route path='/create/cliente' element={<CreateCliente />} />
           <Route path='/login' element={<Login />} />
           <Route path='/update/cliente' element={<UpdateCliente />} />
+
+          <Route path='/atendimentos' element={<Atendimentos />} />
+          <Route path='/create/atendimento' element={<CreateAtendimento />} />
+          <Route path='/update/atendimento' element={<UpdateAtendimento />} />
           {/* <Route path='/login' element={<Login />} /> */}
         </Routes>
         <Footer />

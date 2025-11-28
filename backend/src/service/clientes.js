@@ -1,6 +1,7 @@
 import Cliente from '../model/clientes.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
+import atendimento from '../model/atendimento.js'
 const JWT_SEGREDO = "M3uS3gr3d0"
 const SALT = 10 // 12
 class ServiceCliente {
@@ -8,7 +9,11 @@ class ServiceCliente {
     async FindOne(id) {
         if (!id) throw new Error("falta o ID")
 
-        const cliente = await Cliente.findByPk(id)
+        const cliente = await Cliente.findByPk(id,{
+            include:[{
+                model:atendimento
+            }]
+        })
         if (!cliente) throw new Error("cliente nao encontrado")
 
         return cliente

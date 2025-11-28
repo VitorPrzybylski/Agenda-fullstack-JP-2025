@@ -1,66 +1,66 @@
 import { useEffect, useState } from 'react'
-import { deleteCliente, getClientes } from '../../api/clientes'
+import { deleteAtendimento, getAtendimentos } from '../../api/atendimentos'
 import { Link, useNavigate } from 'react-router-dom'
 import './styles.css'
 import { toast } from 'react-toastify'
 
-function Clientes() {
+function Atendimentos() {
     const navigate = useNavigate()
-    const [clientes, setClientes] = useState([])
+    const [atendimentos, setAtendimentos] = useState([])
 
-    const handleUpdate = async (cliente) => {
-        navigate('/update/cliente', { state: { cliente } })
+    const handleUpdate = async (atendimento) => {
+        navigate('/update/atendimento', { state: { atendimento } })
     }
 
     const handleDelete = async (id) => {
-        const response = await deleteCliente(id)
+        const response = await deleteAtendimento(id)
 
         if (response.status !== 204) {
             toast("Erro ao deletar, tente novamente, mais tarde")
             return
         }
 
-        setClientes(clientes => clientes.filter(cliente => cliente.id !== id))
+        setAtendimentos(atendimentos => atendimentos.filter(atendimento => atendimento.id !== id))
     }
 
     useEffect(() => {
         async function carregar() {
-            const allClientes = await getClientes()
-            setClientes(allClientes)
+            const allAtendimentos = await getAtendimentos()
+            setAtendimentos(allAtendimentos)
         }
         carregar()
     }, [])
 
     return (
         <main>
-            <div className='cliente-list'>
+            <div className='atendimento-list'>
                 <div>
-                    <Link to={'/create/cliente'}>
+                    <Link to={'/create/atendimento'}>
                         <button>Criar</button>
                     </Link>
                 </div>
-                <div className='cliente header' key='header'>
+                <div className='atendimento header' key='header'>
                     <label>Nome</label>
                     <label>Email</label>
                     <label>Ações</label>
                 </div>
                 {
-                    clientes.length == 0
-                        ? <div className='cliente'>
+                    atendimentos.length == 0
+                        ? <div className='atendimento'>
                             <label>Não tem ngm</label>
                         </div>
-                        : clientes.map(cliente =>
-                            <div className='cliente' key={cliente.id}>
-                                <label>{cliente.nome}</label>
-                                <label>{cliente.email}</label>
+                        : atendimentos.map(atendimento =>
+                            <div className='atendimento' key={atendimento.id}>
+                                <label>{atendimento.nome}</label>
+                                <label>{atendimento.email}</label>
                                 <div className='actions'>
                                     <button
                                         type='button'
-                                        onClick={() => handleUpdate(cliente)}
+                                        onClick={() => handleUpdate(atendimento)}
                                     >Alterar</button>
                                     <button
                                         type='button'
-                                        onClick={() => handleDelete(cliente.id)}
+                                        onClick={() => handleDelete(atendimento.id)}
                                     >Deleta</button>
                                 </div>
                             </div>)
@@ -70,4 +70,4 @@ function Clientes() {
     )
 }
 
-export default Clientes
+export default Atendimentos
