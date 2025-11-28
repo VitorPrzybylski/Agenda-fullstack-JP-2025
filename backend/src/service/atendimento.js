@@ -14,20 +14,22 @@ class ServiceAtendimento {
     async FindAll() {
         return Atendimento.findAll()
     }
-    async Create(nome, email, senha) {
-        if (!nome || !email || !senha) {
+    async Create(dia, hora, valor,concluido,clientId) {
+        if (!dia || !hora || !valor|| !concluido|| !clientId) {
             throw new Error("preencher todos os campos")
         }
         await Atendimento.create({
-            nome,
-            email,
-            senha
+            dia,
+            hora,
+            valor,
+            concluido,
+            clientId
         })
     }
 
-    async Update(id, dia, hora, valor, concluido) {
+    async Update(id, dia, hora, valor, concluido,clientId) {
         await Atendimento.update(
-            { dia, hora, valor, concluido },   // campos
+            { dia, hora, valor, concluido,clientId },   // campos
             { where: { id } }                  // condição
         )
     }

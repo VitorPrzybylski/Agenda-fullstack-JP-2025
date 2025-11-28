@@ -11,8 +11,8 @@ class ControllerAtendimento {
     }
     async Create(req, res) {
         try {
-            const { dia,hora,valor,concluido } = req.body
-            await ServiceAtendimento.Create(dia,hora,valor,concluido)
+            const { dia,hora,valor,concluido,clientId } = req.body
+            await ServiceAtendimento.Create(dia,hora,valor,concluido,clientId)
             res.status(201).send()
         } catch (error) {
             res.status(500).send({ error: error.message })
@@ -38,8 +38,7 @@ class ControllerAtendimento {
     }
        Update(req, res) {
         try {
-            const id = req.params.id   // <--- ISSO AQUI FALTAVA!!
-
+            const id = req.params.id   
             const { dia, hora, valor, concluido } = req.body
 
             ServiceAtendimento.Update(id, dia, hora, valor, concluido)

@@ -1,39 +1,39 @@
 import { useEffect, useState } from "react"
-import { updateCliente } from "../../api/clientes";
+import { updateAtendimento } from "../../api/atendimentos";
 import { useLocation, useNavigate } from "react-router-dom";
 import './styles.css'
 import { toast } from "react-toastify";
 
-export default function UpdateCliente() {
+export default function UpdateAtendimento() {
     const navigate = useNavigate()
-    const [cliente, setCliente] = useState({
+    const [atendimento, setAtendimento] = useState({
         nome: '',
         email: '',
         senha: '',
         ativo: true
     })
     const location = useLocation()
-    const { cliente: prevCliente } = location.state
+    const { atendimento: prevAtendimento } = location.state
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-        setCliente({
-            ...cliente,
+        setAtendimento({
+            ...atendimento,
             [id]: value
         })
     }
 
     const handleReset = (e) => {
         e.preventDefault()
-        setCliente({ ...prevCliente, senha: '' })
+        setAtendimento({ ...prevAtendimento, senha: '' })
     }
 
     const handleSave = async (e) => {
         e.preventDefault()
-        const response = await updateCliente(prevCliente.id, cliente)
+        const response = await updateAtendimento(prevAtendimento.id, atendimento)
 
         if (response.status === 200) {
-            navigate('/clientes')
+            navigate('/atendimentos')
             toast("Usuário alterado com sucesso")
         } else {
             toast("Erro ao criar Usuário")
@@ -43,23 +43,27 @@ export default function UpdateCliente() {
 
     // Adicionado
     useEffect(() => {
-        setCliente({ ...prevCliente, senha: '' })
+        setAtendimento({ ...prevAtendimento, senha: '' })
     }, [])
 
     return (
         <div className="form">
             <form>
                 <div>
-                    <label>Nome: </label>
-                    <input type="text" name="nome" id='nome' value={cliente.nome} onChange={handleChange} />
+                    <label>Dia: </label>
+                    <input type="text" name="nome" id='nome' value={atendimento.dia} onChange={handleChange} />
+                </div>
+    <div>
+                    <label>Hora: </label>
+                    <input type="time" name="hora" id='email' value={atendimento.hora} onChange={handleChange} />
                 </div>
                 <div>
-                    <label>Email: </label>
-                    <input type="email" name="email" id='email' value={cliente.email} onChange={handleChange} />
+                    <label>Valor: </label>
+                    <input type="number" name="valor" id='senha' value={atendimento.valor} onChange={handleChange} />
                 </div>
                 <div>
-                    <label>Senha: </label>
-                    <input type="password" name="senha" id='senha' value={cliente.senha} onChange={handleChange} />
+                    <label>Concluido: </label>
+                    <input type="checkbox" name="concluido" id='senha' value={atendimento.concluido} onChange={handleChange} />
                 </div>
                 <div className="actions">
                     <button
