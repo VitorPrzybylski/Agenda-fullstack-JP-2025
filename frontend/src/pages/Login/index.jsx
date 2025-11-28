@@ -21,7 +21,7 @@ export default function Login() {
       const response = await loginCliente(email, senha)
       console.log(response)
       login(response.data.token)
-      navigate('/clientes');
+      navigate('/atendimentos');
 
     } catch (error) {
       toast("email ou senha inválidos")

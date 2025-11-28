@@ -11,7 +11,7 @@ export const getAtendimentos = async () => {
 }
 
 export const createAtendimento = async (atendimento) => {
-   const response = await api.post('/api/v1/atendimento', atendimento)
+   const response = await api.post('/api/v1/atendimento/create', atendimento)
 
    return response
 }

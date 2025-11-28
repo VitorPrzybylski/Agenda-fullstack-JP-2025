@@ -6,7 +6,8 @@ import { toast } from 'react-toastify'
 
 function Atendimentos() {
     const navigate = useNavigate()
-    const [atendimentos, setAtendimentos] = useState([])
+    const [atendimentos, setAtendimentos] = useState([]);
+
 
     const handleUpdate = async (atendimento) => {
         navigate('/update/atendimento', { state: { atendimento } })
@@ -40,32 +41,38 @@ function Atendimentos() {
                     </Link>
                 </div>
                 <div className='atendimento header' key='header'>
-                    <label>Nome</label>
-                    <label>Email</label>
+                    <label>Dia</label>
+                    <label>Hora</label>
+                    <label>Valor</label>
+                    <label>Concluído</label>
                     <label>Ações</label>
+
                 </div>
-                {
-                    atendimentos.length == 0
-                        ? <div className='atendimento'>
-                            <label>Não tem ngm</label>
+                {atendimentos?.length > 0 ? (
+                    atendimentos.map((item) => (
+                        <div key={item.id}>
+                            <p>{item.dia}</p>
+                            <p>{item.hora}</p>
+                            <p>{item.valor}</p>
+                            <p>{item.concluido ? "Concluído" : "Pendente"}</p>
                         </div>
-                        : atendimentos.map(atendimento =>
-                            <div className='atendimento' key={atendimento.id}>
-                                <label>{atendimento.nome}</label>
-                                <label>{atendimento.email}</label>
-                                <div className='actions'>
-                                    <button
-                                        type='button'
-                                        onClick={() => handleUpdate(atendimento)}
-                                    >Alterar</button>
-                                    <button
-                                        type='button'
-                                        onClick={() => handleDelete(atendimento.id)}
-                                    >Deleta</button>
-                                </div>
-                            </div>)
-                }
+                    ))
+                ) : (
+                    <p>Nenhum atendimento encontrado.</p>
+                )}
+                <div className='actions'>
+                    <button
+                        type='button'
+                        onClick={() => handleUpdate(atendimento)}
+                    >Alterar</button>
+                    <button
+                        type='button'
+                        onClick={() => handleDelete(atendimento.id)}
+                    >Deleta</button>
+                </div>
             </div>
+
+
         </main>
     )
 }

@@ -9,6 +9,7 @@ class ServiceAtendimento {
         if (!atendimento) {
             throw new Error("Atendimento nao encontrado")
         }
+        
         return atendimento
     }
     async FindAll() {
