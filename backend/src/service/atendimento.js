@@ -15,8 +15,9 @@ class ServiceAtendimento {
     async FindAll() {
         return Atendimento.findAll()
     }
-    async Create(dia, hora, valor,concluido,clientId) {
-        if (!dia || !hora || !valor|| !concluido|| !clientId) {
+    async Create(dia, hora, valor,concluido,req) {
+        clientId =req.clientId
+        if (!dia || !hora || !valor|| !concluido) {
             throw new Error("preencher todos os campos")
         }
         await Atendimento.create({
