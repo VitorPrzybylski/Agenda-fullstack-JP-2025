@@ -61,9 +61,6 @@ export default function CreateAtendimento() {
                 <input type="checkbox" id='concluido' name="concluido" checked={atendimento.concluido} onChange={(e) =>
                     setAtendimentos({ ...atendimento, concluido: e.target.checked })
                 } />
-
-                <input type="number" id='clientId' name="clientId" value={atendimento.clientId} onChange={handleChange} />
-
                 <div className="actions">
                     <button
                         type="reset"

@@ -1,29 +1,50 @@
-import api from "./api"
+import api from "./api";
 
 export const getAtendimentos = async () => {
-    const response = await api.get('/api/v1/atendimentos')
+    const token = localStorage.getItem("token"); // pega o token do login
+
+    const response = await api.get('/api/v1/atendimentos', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
 
     if(response.status !== 200){
-        return [] // throw new Error('')
+        return [];
     }
 
-    return response.data.atendimentos
+    return response.data.atendimentos;
 }
 
 export const createAtendimento = async (atendimento) => {
-   const response = await api.post('/api/v1/atendimento/create', atendimento)
+    const token = localStorage.getItem("token");
+    const response = await api.post('/api/v1/atendimento/create', atendimento, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
 
-   return response
+    return response;
 }
 
 export const updateAtendimento = async (id, atendimento) => {
-    const response = await api.put(`/api/v1/atendimento/${id}`, atendimento)
+    const token = localStorage.getItem("token");
+    const response = await api.put(`/api/v1/atendimento/${id}`, atendimento, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
 
-    return response
+    return response;
 }
 
 export const deleteAtendimento = async (id) => {
-    const response = await api.delete(`/api/v1/atendimento/${id}`)
+    const token = localStorage.getItem("token");
+    const response = await api.delete(`/api/v1/atendimento/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
 
-    return response
+    return response;
 }

@@ -11,6 +11,7 @@ app.use(cors())
 
 app.use('/api/v1',routerCliente)
 app.use('/api/v1',routerAtendimento)
+// const port = 5432
 const port = 3000
 database.db
     .sync({ force: false })

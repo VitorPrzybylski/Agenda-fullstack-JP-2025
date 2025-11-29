@@ -14,19 +14,24 @@ export default function Login() {
   const handleBackClick = () => {
     navigate('/');
   };
-  const handleLogin = async (e) => {
-    e.preventDefault()
-    //verificar se os valores estao corretos
-    try {
-      const response = await loginCliente(email, senha)
-      console.log(response)
-      login(response.data.token)
-      navigate('/atendimentos');
+const handleLogin = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await loginCliente(email, senha);
 
-    } catch (error) {
-      toast("email ou senha inválidos")
-    }
+    // criar objeto cliente com token
+    const clienteData = {
+      token: response.data.token,
+      email: email // ou outros dados que você quiser armazenar
+    };
+
+    login(clienteData); // salva no AuthContext e localStorage
+    navigate('/atendimentos'); // redireciona
+  } catch (error) {
+    toast("Email ou senha inválidos");
   }
+};
+
   return (
     <div className="login-container">
       <form className="login-form">
